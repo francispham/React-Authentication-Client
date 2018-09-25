@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 class Signup extends Component {
-  onSubmit = (formProps) => {
-    console.log(formProps);
+  onSubmit = formProps => {
+    this.props.signup(formProps);
   };
 
   render() {
@@ -24,7 +27,7 @@ class Signup extends Component {
           <label>Password</label>
           <Field
             name="password"
-            type="text"
+            type="password"
             component="input"
             autoComplete="none"
           />
@@ -34,5 +37,9 @@ class Signup extends Component {
     );
   }
 }
-
-export default reduxForm({ form: 'signup' })(Signup);
+// compose function allow us to apply in series multiple higher order components
+// to a single component at the last call (Signup).
+export default compose(
+  connect(null, actions),
+  reduxForm({ form: 'signup' })
+)(Signup);

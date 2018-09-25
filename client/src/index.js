@@ -22,7 +22,7 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={createStore(reducers, {})}>
+  <Provider store={store}>
     <BrowserRouter>
       <App>
         <Route path="/" component={Welcome} />
