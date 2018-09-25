@@ -6,10 +6,11 @@ import { AUTH_USER, AUTH_ERROR } from './types';
 // Redux Promise which is just limited to return one action as a time!
 
 // Action Creator signup:
-export const signup = formProps => async dispatch => {
+export const signup = (formProps, callback) => async dispatch => {
   try {
     const response = await axios.post('http://localhost:3090/signup', formProps);
     dispatch({ type: AUTH_USER, payload: response.data.token });
+    callback(); //For the user to get redirected
   } catch (e) {
   dispatch({ type: AUTH_ERROR, payload: 'Email in use' })
   }
