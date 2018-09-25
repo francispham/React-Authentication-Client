@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 
 class Signup extends Component {
+  onSubmit = (formProps) => {
+    console.log(formProps);
+  };
+
   render() {
+    const { handleSubmit } = this.props;
+
     return (
-      <form>
+      <form onSubmit={handleSubmit(this.onSubmit)}>
         <fieldset>
           <label>Email</label>
           <Field
@@ -15,14 +21,15 @@ class Signup extends Component {
           />
         </fieldset>
         <fieldset>
-          <label>Passpord</label>
+          <label>Password</label>
           <Field
-            name="email"
+            name="password"
             type="text"
             component="input"
             autoComplete="none"
           />
         </fieldset>
+        <button>Sign Up</button>
       </form>
     );
   }
